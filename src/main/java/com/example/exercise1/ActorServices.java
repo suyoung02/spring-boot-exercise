@@ -14,4 +14,10 @@ public class ActorServices {
         this.actorRepository = actorRepository;
     }
 
+    public Actor saveActor(Actor theActor){
+        return actorRepository.save(theActor);
+    }
+
+
+
 }

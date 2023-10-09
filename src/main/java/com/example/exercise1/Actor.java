@@ -1,9 +1,6 @@
 package com.example.exercise1;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 
@@ -11,6 +8,7 @@ import java.sql.Timestamp;
 @Table(name = "actor")
 public class Actor {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "actor_id")
     private Integer actorId;
 
@@ -27,8 +25,7 @@ public class Actor {
 
     }
 
-    public Actor(Integer actorId, String firstName, String lastName, Timestamp lastUpdate) {
-        this.actorId = actorId;
+    public Actor( String firstName, String lastName, Timestamp lastUpdate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.lastUpdate = lastUpdate;
