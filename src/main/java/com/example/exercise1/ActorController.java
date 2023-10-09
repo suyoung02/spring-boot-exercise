@@ -25,8 +25,14 @@ public class ActorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Actor> updateUser(@PathVariable (value = "id") Integer id,@RequestBody Actor actorDetails) {
-        Actor actor = actorRepository.findByActorId(id);
+    public ResponseEntity<Actor> updateUser(@PathVariable (value = "id") String id,@RequestBody Actor actorDetails){
+        int actorId;
+        try {
+            actorId = Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            throw new AppException(400, HttpStatus.BAD_REQUEST, "id should be integer");
+        }
+        Actor actor = actorRepository.findByActorId(actorId);
         if (actor == null) {
             throw new AppException(404, HttpStatus.NOT_FOUND,"User not found");
 
