@@ -31,7 +31,7 @@ public class ActorController {
             throw new AppException(404, HttpStatus.NOT_FOUND,"User not found");
 
         }
-        final Actor updatedUser = actorServices.updateActor(actor, actorDetails);
+        final Actor updatedUser = actorServices.detailActor(actor);
         return ResponseEntity.ok(updatedUser);
     }
 }

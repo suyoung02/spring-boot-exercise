@@ -17,11 +17,10 @@ public class ActorServices {
         this.actorRepository = actorRepository;
     }
 
-    public Actor updateActor(Actor actor, Actor actorDetails) {
-        actor.setLastName(actorDetails.getLastName());
-        actor.setFirstName(actorDetails.getFirstName());
-        Date date = new Date();
-        actor.setLastUpdate(new Timestamp(date.getTime()));
+    public Actor detailActor(Actor actor) {
+        actor.setLastName(actor.getLastName());
+        actor.setFirstName(actor.getFirstName());
+        actor.setLastUpdate(actor.getLastUpdate());
         actorRepository.save(actor);
         return actor;
     }
