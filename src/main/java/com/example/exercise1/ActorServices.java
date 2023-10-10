@@ -24,6 +24,7 @@ public class ActorServices {
         return false;
     }
 
+
     public Actor updateActor(Actor actor, Actor actorDetails) {
         actor.setLastName(actorDetails.getLastName());
         actor.setFirstName(actorDetails.getFirstName());
@@ -31,5 +32,9 @@ public class ActorServices {
         actor.setLastUpdate(new Timestamp(date.getTime()));
         actorRepository.save(actor);
         return actor;
+
+    public List<Actor> getAll() {
+        return actorRepository.findAll();
+
     }
 }

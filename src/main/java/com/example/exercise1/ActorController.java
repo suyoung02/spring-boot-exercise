@@ -7,9 +7,11 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/actor")
+@RequestMapping(value = "/api/actors")
 public class ActorController {
     private final ActorServices actorServices;
     private final ActorRepository actorRepository;
@@ -37,4 +39,8 @@ public class ActorController {
         return ResponseEntity.status(HttpStatus.OK).body("Deleted");
     }
 
+    @GetMapping("")
+    public List<Actor> getAll() {
+        return actorServices.getAll();
+    }
 }
