@@ -1,6 +1,9 @@
 package com.example.exercise1;
 
+
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.sql.Timestamp;
 
@@ -13,9 +16,11 @@ public class Actor {
     private Integer actorId;
 
     @Column(name = "first_name")
+    @NotEmpty(message = "first name not be empty")
     private String firstName;
 
     @Column(name = "last_name")
+    @NotEmpty(message = "last name not be empty)
     private String lastName;
 
     @Column(name = "last_update")
