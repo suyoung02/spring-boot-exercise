@@ -14,4 +14,7 @@ public class ActorServices {
         this.actorRepository = actorRepository;
     }
 
+    public List<Actor> getAll() {
+        return actorRepository.findAll();
+    }
 }
