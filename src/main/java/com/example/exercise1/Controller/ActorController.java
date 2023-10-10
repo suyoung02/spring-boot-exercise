@@ -1,14 +1,14 @@
-package com.example.exercise1;
+package com.example.exercise1.Controller;
 
+import com.example.exercise1.Service.ActorServices;
+import com.example.exercise1.Exception.AppException;
+import com.example.exercise1.Model.Actor;
 import jakarta.validation.Valid;
-import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.server.ResponseStatusException;
+
 import java.sql.Timestamp;
 import java.util.*;
 

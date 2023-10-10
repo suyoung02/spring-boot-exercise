@@ -1,8 +1,10 @@
-package com.example.exercise1;
+package com.example.exercise1.Service;
 
+import com.example.exercise1.Exception.AppException;
+import com.example.exercise1.Model.Actor;
+import com.example.exercise1.Repository.ActorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;

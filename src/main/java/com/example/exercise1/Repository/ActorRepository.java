@@ -1,11 +1,8 @@
-package com.example.exercise1;
+package com.example.exercise1.Repository;
 
+import com.example.exercise1.Model.Actor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface ActorRepository extends JpaRepository<Actor, Integer> {

@@ -1,11 +1,12 @@
-package com.example.exercise1;
+package com.example.exercise1.Model;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "actor")
@@ -25,6 +26,9 @@ public class Actor {
 
     @Column(name = "last_update")
     private Timestamp lastUpdate;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "actor")
+    private List<FilmActor> filmActors = new ArrayList<>();
 
     public Actor () {
 
