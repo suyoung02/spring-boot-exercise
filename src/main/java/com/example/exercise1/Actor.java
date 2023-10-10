@@ -17,6 +17,7 @@ public class Actor {
     private Integer actorId;
 
     @Column(name = "first_name")
+    @NotEmpty(message = "Not be empty")
     private String firstName;
 
     @Column(name = "last_name")
