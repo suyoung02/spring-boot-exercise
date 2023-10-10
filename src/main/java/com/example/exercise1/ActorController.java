@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/actor")
+@RequestMapping(value = "/api/actors")
 public class ActorController {
     private ActorServices actorServices;
 
