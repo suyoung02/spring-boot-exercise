@@ -1,6 +1,7 @@
 package com.example.exercise1;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,11 @@ public class ActorServices {
         this.actorRepository = actorRepository;
     }
 
-    public Actor updateActor(Actor actor, Actor actorDetails) {
+    public Actor updateActor(Integer actorId, Actor actorDetails) {
+        Actor actor = actorRepository.findByActorId(actorId);
+        if (actor == null) {
+            throw new AppException(404, HttpStatus.NOT_FOUND,"User not found");
+        }
         actor.setLastName(actorDetails.getLastName());
         actor.setFirstName(actorDetails.getFirstName());
         Date date = new Date();

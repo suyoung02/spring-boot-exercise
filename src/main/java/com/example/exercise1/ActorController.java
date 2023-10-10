@@ -17,11 +17,9 @@ import java.util.*;
 @RequestMapping(value = "/api/actor")
 public class ActorController {
     private final ActorServices actorServices;
-    private final ActorRepository actorRepository;
     @Autowired
-    public ActorController (ActorServices actorServices, ActorRepository actorRepository) {
+    public ActorController (ActorServices actorServices) {
         this.actorServices = actorServices;
-        this.actorRepository = actorRepository;
     }
 
     @PutMapping("/{id}")
@@ -32,12 +30,8 @@ public class ActorController {
         } catch (NumberFormatException e) {
             throw new AppException(400, HttpStatus.BAD_REQUEST, "id should be integer");
         }
-        Actor actor = actorRepository.findByActorId(actorId);
-        if (actor == null) {
-            throw new AppException(404, HttpStatus.NOT_FOUND,"User not found");
 
-        }
-        final Actor updatedUser = actorServices.updateActor(actor, actorDetails);
+        final Actor updatedUser = actorServices.updateActor(actorId, actorDetails);
         return ResponseEntity.ok(updatedUser);
     }
 }
