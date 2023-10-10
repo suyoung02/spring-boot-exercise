@@ -17,6 +17,7 @@ public class ActorServices {
     public ActorServices(ActorRepository actorRepository) {
         this.actorRepository = actorRepository;
     }
+  
     public Boolean deleteActorByID(Integer id){
         if(actorRepository.existsById(id)) {
             actorRepository.deleteById(id);
@@ -33,6 +34,10 @@ public class ActorServices {
         actor.setLastUpdate(new Timestamp(date.getTime()));
         actorRepository.save(actor);
         return actor;
+
+    public Actor saveActor(Actor theActor){
+        return actorRepository.save(theActor);
+    }
 
     public Actor updateActor(Integer actorId, Actor actorDetails) {
         Actor actor = actorRepository.findByActorId(actorId);

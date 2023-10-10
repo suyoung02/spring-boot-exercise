@@ -1,9 +1,7 @@
 package com.example.exercise1;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 
@@ -13,15 +11,16 @@ import java.sql.Timestamp;
 @Table(name = "actor")
 public class Actor {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "actor_id")
     private Integer actorId;
 
     @Column(name = "first_name")
-    @NotEmpty(message = "Not be empty")
+    @NotEmpty(message = "first name not be empty")
     private String firstName;
 
     @Column(name = "last_name")
-    @NotEmpty
+    @NotEmpty(message = "last name not be empty)
     private String lastName;
 
     @Column(name = "last_update")
@@ -31,8 +30,7 @@ public class Actor {
 
     }
 
-    public Actor(Integer actorId, String firstName, String lastName, Timestamp lastUpdate) {
-        this.actorId = actorId;
+    public Actor( String firstName, String lastName, Timestamp lastUpdate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.lastUpdate = lastUpdate;
