@@ -39,8 +39,9 @@ public class ActorController {
         final Actor updatedUser = actorServices.detailActor(actorId);
         return ResponseEntity.ok(updatedUser);
 }
-    @PostMapping("")
-    public Actor addActor(@RequestBody Actor theActor){
+    @PostMapping()
+    public Actor addActor(@Valid @RequestBody Actor theActor){
+        System.out.println("abc");
         theActor.setActorId(0);
         Date date=new Date();
         theActor.setLastUpdate(new Timestamp(date.getTime()));
@@ -49,7 +50,7 @@ public class ActorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Actor> updateUser(@PathVariable (value = "id") String id,@RequestBody Actor actorDetails){
+    public ResponseEntity<Actor> updateUser(@PathVariable (value = "id") String id,@Valid @RequestBody Actor actorDetails){
         int actorId;
         try {
             actorId = Integer.parseInt(id);
