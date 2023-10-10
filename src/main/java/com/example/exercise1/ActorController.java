@@ -14,34 +14,13 @@ import java.sql.Timestamp;
 import java.util.*;
 
 @RestController
-@RequestMapping(value = "/api/actor")
+@RequestMapping(value = "/api/actors")
 public class ActorController {
-    private final ActorServices actorServices;
-    private final ActorRepository actorRepository;
+    private ActorServices actorServices;
+
     @Autowired
-    public ActorController (ActorServices actorServices, ActorRepository actorRepository) {
+    public ActorController (ActorServices actorServices) {
         this.actorServices = actorServices;
-        this.actorRepository = actorRepository;
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Actor> updateUser(@PathVariable (value = "id") Integer id,@RequestBody Actor actorDetails) {
-        Actor actor = actorRepository.findByActorId(id);
-        if (actor == null) {
-            throw new AppException(404, HttpStatus.NOT_FOUND,"User not found");
-
-        }
-        final Actor updatedUser = actorServices.updateActor(actor, actorDetails);
-        return ResponseEntity.ok(updatedUser);
-    }
-    @GetMapping("/{id}")
-    public ResponseEntity<Actor> getDetailUser(@PathVariable (value = "id") Integer id,@RequestBody Actor actorDetails) {
-        Actor actor = actorRepository.findByActorId(id);
-        if (actor == null) {
-            throw new AppException(404, HttpStatus.NOT_FOUND,"User not found");
-
-        }
-        final Actor detailActor = actorServices.detailActor(actor);
-        return ResponseEntity.ok(detailActor);
-    }
 }
