@@ -51,8 +51,14 @@ public class ActorController {
     }
     
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<String> deleteActor(@PathVariable(value = "id") Integer id){
-        if(!actorServices.deleteActorByID(id)){
+    public ResponseEntity<String> deleteActor(@PathVariable(value = "id") String id){
+        int actorId;
+        try {
+            actorId = Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            throw new AppException(400, HttpStatus.BAD_REQUEST, "id should be integer");
+        }
+        if(!actorServices.deleteActorByID(actorId)){
             throw new AppException(404, HttpStatus.NOT_FOUND, "User not found");
         }
         return ResponseEntity.status(HttpStatus.OK).body("Deleted");
