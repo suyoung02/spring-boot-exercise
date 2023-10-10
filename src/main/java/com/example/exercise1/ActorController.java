@@ -31,7 +31,17 @@ public class ActorController {
             throw new AppException(404, HttpStatus.NOT_FOUND,"User not found");
 
         }
-        final Actor updatedUser = actorServices.detailActor(actor);
+        final Actor updatedUser = actorServices.updateActor(actor, actorDetails);
         return ResponseEntity.ok(updatedUser);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Actor> getDetailUser(@PathVariable (value = "id") Integer id,@RequestBody Actor actorDetails) {
+        Actor actor = actorRepository.findByActorId(id);
+        if (actor == null) {
+            throw new AppException(404, HttpStatus.NOT_FOUND,"User not found");
+
+        }
+        final Actor detailActor = actorServices.detailActor(actor);
+        return ResponseEntity.ok(detailActor);
     }
 }
