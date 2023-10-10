@@ -17,6 +17,22 @@ public class ActorServices {
     public ActorServices(ActorRepository actorRepository) {
         this.actorRepository = actorRepository;
     }
+    public Boolean deleteActorByID(Integer id){
+        if(actorRepository.existsById(id)) {
+            actorRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+
+    public Actor updateActor(Actor actor, Actor actorDetails) {
+        actor.setLastName(actorDetails.getLastName());
+        actor.setFirstName(actorDetails.getFirstName());
+        Date date = new Date();
+        actor.setLastUpdate(new Timestamp(date.getTime()));
+        actorRepository.save(actor);
+        return actor;
 
     public Actor updateActor(Integer actorId, Actor actorDetails) {
         Actor actor = actorRepository.findByActorId(actorId);
@@ -29,5 +45,8 @@ public class ActorServices {
         actor.setLastUpdate(new Timestamp(date.getTime()));
         actorRepository.save(actor);
         return actor;
+
+    public List<Actor> getAll() {
+        return actorRepository.findAll();
     }
 }
