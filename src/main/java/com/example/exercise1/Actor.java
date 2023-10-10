@@ -20,7 +20,7 @@ public class Actor {
     private String firstName;
 
     @Column(name = "last_name")
-    @NotEmpty(message = "last name not be empty)
+    @NotEmpty(message = "last name not be empty")
     private String lastName;
 
     @Column(name = "last_update")
