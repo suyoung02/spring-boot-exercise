@@ -27,7 +27,18 @@ public class ActorController {
     public List<Actor> getAll() {
         return actorServices.getAll();
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<Actor> detailUser(@PathVariable (value = "id") String id,@RequestBody Actor actorDetails) {
+        int actorId;
+        try {
+            actorId = Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            throw new AppException(400, HttpStatus.BAD_REQUEST, "id should be integer");
+        }
 
+        final Actor updatedUser = actorServices.detailActor(actorId);
+        return ResponseEntity.ok(updatedUser);
+}
     @PostMapping("")
     public Actor addActor(@RequestBody Actor theActor){
         theActor.setActorId(0);
@@ -36,7 +47,7 @@ public class ActorController {
         Actor dbActor = actorServices.saveActor(theActor);
         return dbActor;
     }
-    
+
     @PutMapping("/{id}")
     public ResponseEntity<Actor> updateUser(@PathVariable (value = "id") String id,@RequestBody Actor actorDetails){
         int actorId;

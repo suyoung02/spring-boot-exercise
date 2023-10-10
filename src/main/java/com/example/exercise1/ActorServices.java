@@ -56,4 +56,8 @@ public class ActorServices {
     public List<Actor> getAll() {
         return actorRepository.findAll();
     }
+
+    public Actor detailActor(Integer actorId) {
+        return  actorRepository.findByActorId(actorId);
+    }
 }
