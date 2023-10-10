@@ -34,6 +34,7 @@ public class ActorServices {
         actor.setLastUpdate(new Timestamp(date.getTime()));
         actorRepository.save(actor);
         return actor;
+    }
 
     public Actor saveActor(Actor theActor){
         return actorRepository.save(theActor);
@@ -42,7 +43,7 @@ public class ActorServices {
     public Actor updateActor(Integer actorId, Actor actorDetails) {
         Actor actor = actorRepository.findByActorId(actorId);
         if (actor == null) {
-            throw new AppException(404, HttpStatus.NOT_FOUND,"User not found");
+            throw new AppException(404, HttpStatus.NOT_FOUND, "User not found");
         }
         actor.setLastName(actorDetails.getLastName());
         actor.setFirstName(actorDetails.getFirstName());
@@ -50,6 +51,7 @@ public class ActorServices {
         actor.setLastUpdate(new Timestamp(date.getTime()));
         actorRepository.save(actor);
         return actor;
+    }
 
     public List<Actor> getAll() {
         return actorRepository.findAll();
