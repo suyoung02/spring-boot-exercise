@@ -5,10 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/actor")
+@RequestMapping(value = "/api/actors")
 public class ActorController {
     private ActorServices actorServices;
 
@@ -17,4 +18,8 @@ public class ActorController {
         this.actorServices = actorServices;
     }
 
+    @GetMapping("")
+    public List<Actor> getAll() {
+        return actorServices.getAll();
+    }
 }
