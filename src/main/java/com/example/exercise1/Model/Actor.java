@@ -27,9 +27,6 @@ public class Actor {
     @Column(name = "last_update")
     private Timestamp lastUpdate;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "actor")
-    private List<FilmActor> filmActors = new ArrayList<>();
-
     public Actor () {
 
     }
