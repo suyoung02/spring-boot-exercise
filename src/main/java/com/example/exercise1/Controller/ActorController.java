@@ -28,7 +28,7 @@ public class ActorController {
         return actorServices.getAll();
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Actor> detailUser(@PathVariable (value = "id") String id,@RequestBody Actor actorDetails) {
+    public ResponseEntity<Actor> detailUser(@PathVariable (value = "id") String id) {
         int actorId;
         try {
             actorId = Integer.parseInt(id);
