@@ -1,18 +1,15 @@
 package com.example.exercise1.Model;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "actor")
 public class Actor {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "actor_id")
     private Integer actorId;
 
@@ -27,11 +24,11 @@ public class Actor {
     @Column(name = "last_update")
     private Timestamp lastUpdate;
 
-    public Actor () {
+    public Actor() {
 
     }
 
-    public Actor( String firstName, String lastName, Timestamp lastUpdate) {
+    public Actor(String firstName, String lastName, Timestamp lastUpdate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.lastUpdate = lastUpdate;
