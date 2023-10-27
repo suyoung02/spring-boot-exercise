@@ -3,6 +3,7 @@ package com.example.exercise1.Controller;
 import com.example.exercise1.Service.ActorServices;
 import com.example.exercise1.Exception.AppException;
 import com.example.exercise1.Model.Actor;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,13 +28,16 @@ public class ActorController {
     public List<Actor> getAll() {
         return actorServices.getAll();
     }
+
+    @Operation(summary = "Find book by ID", description = "Returns a single book", tags = { "book" })
     @GetMapping("/{id}")
     public ResponseEntity<Actor> detailUser(@PathVariable (value = "id") String id) {
         int actorId;
+        Actor a = new Actor();
         try {
             actorId = Integer.parseInt(id);
         } catch (NumberFormatException e) {
-            throw new AppException(400, HttpStatus.BAD_REQUEST, "id should be integer");
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
 
         final Actor updatedUser = actorServices.detailActor(actorId);
@@ -71,8 +75,8 @@ public class ActorController {
             throw new AppException(400, HttpStatus.BAD_REQUEST, "id should be integer");
         }
         if(!actorServices.deleteActorByID(actorId)){
-            throw new AppException(404, HttpStatus.NOT_FOUND, "User not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Djt me may");
         }
-        return ResponseEntity.status(HttpStatus.OK).body("Deleted");
+        return ResponseEntity.status(400).body("Deleted");
     }
 }
