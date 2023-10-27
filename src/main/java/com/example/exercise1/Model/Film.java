@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import com.example.exercise1.Enum.Rating.Rating;
 import com.example.exercise1.Validation.SetValidation.ValidSet;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,7 +27,11 @@ public class Film {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "film_id")
     private Integer filmId;
-
+    @Schema(
+            description = "title of film",
+            name = "title",
+            type = "string",
+            example = "Look behind me")
     @Column(name = "title")
     @NotBlank(message = "The title may not be blank")
     private String title;
