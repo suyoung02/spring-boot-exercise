@@ -7,6 +7,10 @@ import java.util.List;
 
 import com.example.exercise1.Exception.AppException;
 import com.example.exercise1.Model.Actor;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,19 +30,25 @@ public class FilmController {
     FilmController(FilmServices filmServices) {
         this.filmServices = filmServices;
     }
-
+    @Operation(summary = "Get all film", description = "Get all film in db")
     @GetMapping()
     public ResponseEntity<List<Film>> getAll() {
         return new ResponseEntity<>(filmServices.getAll(), HttpStatus.OK);
     }
-
+    @Operation(summary = "Add one film", description = "Add one film to db")
     @PostMapping()
     public ResponseEntity<Film> createNewFilm(@Valid @RequestBody Film newFilm) {
         return new ResponseEntity<>(filmServices.createNewFilm(newFilm), HttpStatus.OK);
     }
-
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "400", description = "Invalid ID supplied"),
+            @ApiResponse(responseCode = "404", description = "Film not found")})
+    @Operation(summary = "Detail film", description = "Detail of film ")
     @GetMapping("/{id}")
-    public ResponseEntity<Film> detailFilm(@PathVariable (value = "id") String id) {
+    public ResponseEntity<Film> detailFilm(@Parameter( name =  "id",
+            description  = "Id of film",
+            example = "1",
+            required = true) @PathVariable (value = "id") String id ) {
         int filmId;
         try {
             filmId = Integer.parseInt(id);
