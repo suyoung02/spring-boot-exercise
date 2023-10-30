@@ -4,6 +4,7 @@ import com.example.exercise1.Service.ActorServices;
 import com.example.exercise1.Exception.AppException;
 import com.example.exercise1.Model.Actor;
 import jakarta.validation.Valid;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import java.util.*;
 @RestController
 @RequestMapping(value = "/api/actors")
 public class ActorController {
+    private static final Logger logger = Logger.getLogger(ActorController.class);
     private final ActorServices actorServices;
 
     @Autowired
@@ -25,6 +27,7 @@ public class ActorController {
   
     @GetMapping("")
     public List<Actor> getAll() {
+        logger.info("Get all actor in db");
         return actorServices.getAll();
     }
     @GetMapping("/{id}")
