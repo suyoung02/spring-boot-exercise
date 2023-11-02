@@ -5,6 +5,11 @@ public class LogEntry {
     private String time;
     private String level;
     private String message;
+    private String line;
+
+
+
+
 
     public String getTime() {
         return time;
@@ -38,7 +43,7 @@ public class LogEntry {
         this.line = line;
     }
 
-    private String line;
+
     public LogEntry(String time, String level, String message, String line) {
         this.time = time;
         this.level = level;

@@ -18,6 +18,11 @@ import java.util.*;
 @RequestMapping(value = "/api/actors")
 public class ActorController {
     private static final Logger logger = Logger.getLogger(ActorController.class);
+
+
+
+
+
     private final ActorServices actorServices;
 
     @Autowired
@@ -30,18 +35,41 @@ public class ActorController {
         logger.info("Get all actor in db");
         return actorServices.getAll();
     }
+
+
+
+
+
+
+
+
+
     @GetMapping("/{id}")
     public ResponseEntity<Actor> detailUser(@PathVariable (value = "id") String id) {
         int actorId;
+        logger.info("Access API get details actor");
         try {
             actorId = Integer.parseInt(id);
+            logger.info("Parsing string id to integer");
         } catch (NumberFormatException e) {
+            logger.error("id should be integer");
             throw new AppException(400, HttpStatus.BAD_REQUEST, "id should be integer");
         }
-
+        String msg = String.format("return detail info of actor %d", actorId);
+        logger.info(msg);
         final Actor updatedUser = actorServices.detailActor(actorId);
         return ResponseEntity.ok(updatedUser);
 }
+
+
+
+
+
+
+
+
+
+
     @PostMapping()
     public Actor addActor(@Valid @RequestBody Actor theActor){
         System.out.println("abc");
