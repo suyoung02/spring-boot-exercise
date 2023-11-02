@@ -19,10 +19,6 @@ import java.util.*;
 public class ActorController {
     private static final Logger logger = Logger.getLogger(ActorController.class);
 
-
-
-
-
     private final ActorServices actorServices;
 
     @Autowired
@@ -35,14 +31,6 @@ public class ActorController {
         logger.info("Get all actor in db");
         return actorServices.getAll();
     }
-
-
-
-
-
-
-
-
 
     @GetMapping("/{id}")
     public ResponseEntity<Actor> detailUser(@PathVariable (value = "id") String id) {
@@ -60,23 +48,16 @@ public class ActorController {
         final Actor updatedUser = actorServices.detailActor(actorId);
         return ResponseEntity.ok(updatedUser);
 }
-
-
-
-
-
-
-
-
-
-
     @PostMapping()
     public Actor addActor(@Valid @RequestBody Actor theActor){
+        logger.info("Add new actor to database");
         System.out.println("abc");
         theActor.setActorId(0);
         Date date=new Date();
         theActor.setLastUpdate(new Timestamp(date.getTime()));
         Actor dbActor = actorServices.saveActor(theActor);
+        String msg = String.format("Add new actor %d to database", dbActor.getActorId());
+        logger.info(msg);
         return dbActor;
     }
 
@@ -84,12 +65,16 @@ public class ActorController {
     public ResponseEntity<Actor> updateUser(@PathVariable (value = "id") String id,@Valid @RequestBody Actor actorDetails){
         int actorId;
         try {
+            logger.info("Parsing id to integer");
             actorId = Integer.parseInt(id);
         } catch (NumberFormatException e) {
+            logger.error("id should be integer");
             throw new AppException(400, HttpStatus.BAD_REQUEST, "id should be integer");
         }
 
         final Actor updatedUser = actorServices.updateActor(actorId, actorDetails);
+        String msg = String.format("Update actor %d success", actorId);
+        logger.info(msg);
         return ResponseEntity.ok(updatedUser);
     }
     
@@ -97,13 +82,18 @@ public class ActorController {
     public ResponseEntity<String> deleteActor(@PathVariable(value = "id") String id){
         int actorId;
         try {
+            logger.info("Parsing id to integer");
             actorId = Integer.parseInt(id);
         } catch (NumberFormatException e) {
+            logger.error("id should be integer");
             throw new AppException(400, HttpStatus.BAD_REQUEST, "id should be integer");
         }
         if(!actorServices.deleteActorByID(actorId)){
+            String msg = String.format("Actor id %d not found", actorId);
+            logger.error(msg);
             throw new AppException(404, HttpStatus.NOT_FOUND, "User not found");
         }
+        logger.info("Deleted user");
         return ResponseEntity.status(HttpStatus.OK).body("Deleted");
     }
 }
