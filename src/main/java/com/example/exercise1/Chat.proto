@@ -1,0 +1,15 @@
+syntax = "proto3";
+option java_package="com.example.exercise1.grpc";
+package com.example.exercise1.grpc;
+
+message ChatMessage {
+  string sender = 1;
+  string content = 2;
+}
+
+service ChatService {
+  rpc JoinChat(ChatMessage) returns (ChatMessage);
+  rpc SendMessage(ChatMessage) returns (ChatMessage);
+  rpc LeaveChat(ChatMessage) returns (ChatMessage);
+  rpc StreamChat(ChatMessage) returns (stream ChatMessage);
+}
